@@ -1,0 +1,14 @@
+#!/bin/sh
+
+echo "Choose your wallpaper, use the exact name with the file extension"
+ls $HOME/Pictures/Wallpapers
+read -p ">>> " WALLNAME
+xwallpaper --zoom $HOME/Pictures/Wallpapers/$WALLNAME
+echo "Generating color scheme..."
+wal -i $HOME/Pictures/Wallpapers/$WALLNAME >/dev/null
+sed -i 'N;$!P;D' $HOME/.cache/wal/colors-wal-dwm.h
+echo "Recompiling DWM and DMENU with the new colors..."
+(cd $HOME/.local/src/dwm && sudo make clean install>/dev/null)
+(cd $HOME/.local/src/dmenu && sudo make clean install>/dev/null)
+
+echo "Restart dwm ! "

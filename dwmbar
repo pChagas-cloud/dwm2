@@ -1,0 +1,4 @@
+while true; do
+	xsetroot -name "| $(disk) | $(memory) | $(clock) |"
+	sleep 1
+done
